@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-public class DayOne
+public class DayTwo
 {
     static private int toInt(final char ch, final int default_value)
     {
@@ -33,21 +33,21 @@ public class DayOne
         int sum = 0;
         
         final char[] input_chars = input.toCharArray();
+        final int distance = input_chars.length / 2;
         
-        final char[] full_input_chars = Arrays.copyOf(input_chars, input_chars.length + 1);
-        full_input_chars[full_input_chars.length - 1] = full_input_chars[0]; // Copy wrap around character
-        
-        char last_ch = '\0';
-        for (final char ch : full_input_chars)
+        for (int idx = 0; idx < input_chars.length; idx++)
         {
+            final char ch = input_chars[idx];
+            
             if (! Character.isDigit(ch)) continue;
             
-            if (ch == last_ch)
+            final int rot_idx = (idx + distance) % input_chars.length;
+            final int rot_ch = input_chars[rot_idx];
+            
+            if (ch == rot_ch)
             {
                 sum += toInt(ch, 0);
             }
-            
-            last_ch = ch;
         }
 
         return sum;
@@ -61,6 +61,11 @@ public class DayOne
             String input = new BufferedReader(new InputStreamReader(System.in)).readLine();
             
             if ("exit".equalsIgnoreCase(input)) return;
+            if (0 != input.length() % 2)
+            {
+                System.err.println("Number must have an even number of digits! Try again.");
+                continue;
+            }
             
             int sum = totalDuplicates(input);
             System.out.println(sum);
