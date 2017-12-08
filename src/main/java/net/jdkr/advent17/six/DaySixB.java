@@ -3,11 +3,13 @@ package net.jdkr.advent17.six;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class DaySixA
+public class DaySixB
 {
     static private int findIndexOfMax(int[] values)
     {
@@ -38,9 +40,9 @@ public class DaySixA
         return values;
     }
     
-    static private int stepsToRepeat(int[] values)
+    static private int sizeOfCycle(int[] values)
     {
-        Set<Integer> seen_values = new HashSet<>();
+        List<Integer> seen_values = new ArrayList<>();
         System.out.println(Arrays.toString(values));
         
         do
@@ -50,12 +52,12 @@ public class DaySixA
             values = redistribute(values, max_idx);
             System.out.println(Arrays.toString(values));
         }
-        while (! seen_values.contains(Arrays.hashCode(values)));
+        while (seen_values.indexOf(Arrays.hashCode(values)) < 0);
         
-        return seen_values.size();
+        return seen_values.size() - seen_values.indexOf(Arrays.hashCode(values));
     }
     
-    static private int stepsToRepeat(String input)
+    static private int sizeOfCycle(String input)
     {
         String[] str_values = input.split("\\s+");
         int[] values = new int[str_values.length];
@@ -64,7 +66,7 @@ public class DaySixA
             values[idx] = Integer.parseInt(str_values[idx]);
         }
         
-        return stepsToRepeat(values);
+        return sizeOfCycle(values);
     }
     
     static public void main(String[] args) throws IOException
@@ -76,8 +78,8 @@ public class DaySixA
             
             if ("exit".equalsIgnoreCase(input)) return;
             
-            int steps = stepsToRepeat(input);
-            System.out.format("Steps before repeat: %d\n\n", steps);
+            int steps = sizeOfCycle(input);
+            System.out.format("Size of inifinite loop: %d\n\n", steps);
         }
     }
 }
