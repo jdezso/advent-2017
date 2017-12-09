@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaySevenA
+public class DaySevenB
 {
     static public void main(String[] args) throws IOException
     {
