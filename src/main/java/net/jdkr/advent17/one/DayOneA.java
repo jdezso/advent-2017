@@ -1,9 +1,9 @@
 package net.jdkr.advent17.one;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
+
+import net.jdkr.advent17.CommandLineReader;
 
 public class DayOneA
 {
@@ -55,16 +55,7 @@ public class DayOneA
     
     static public void main(String[] args) throws IOException
     {
-        while (true)
-        {
-            System.out.println("Enter number to process:");
-            String input = new BufferedReader(new InputStreamReader(System.in)).readLine();
-            
-            if ("exit".equalsIgnoreCase(input)) return;
-            
-            int sum = totalDuplicates(input);
-            System.out.println(sum);
-            System.out.println();
-        }
+        CommandLineReader reader = new CommandLineReader();
+        reader.processSingleLinesUntilExit(DayOneA::totalDuplicates);
     }
 }
