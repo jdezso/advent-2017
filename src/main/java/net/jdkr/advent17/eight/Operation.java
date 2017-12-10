@@ -1,6 +1,7 @@
 package net.jdkr.advent17.eight;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Operation
@@ -62,7 +63,7 @@ public class Operation
             }
         }
         
-        return operations;
+        return Collections.unmodifiableList(operations);
     }
     
     static public void executeOperations(final List<Operation> operations)
